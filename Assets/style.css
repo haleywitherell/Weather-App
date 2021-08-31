@@ -1,11 +1,22 @@
 :root {
-background-color: white;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 20px;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 
 header {
-    background-image: radial-gradient(ellipse, rgb(58, 101, 218), white);
+    background-image: radial-gradient(ellipse, rgb(18, 68, 207), white);
+    color: white;
     font-size: 35px;
     text-align: center;
+}
+
+input {
+    margin-top: 20px;
+}
+
+#search-btn {
+    /* padding-left: 105px;
+    padding-right: 105px; */
+    margin-top: 20px;
 }
