@@ -18,23 +18,26 @@
  
     <header class="jumbotron">Weather Dashboard</header>
 
-    <div class="container row">
+    <main class="container row">
         <aside class="col-4">
             <h1>Search for a City:</h1>
             <input class="form-control" type="text" placeholder="Enter City Name">
             <button id="search-btn" class="btn btn-primary" type="submit">Search</button>
         </aside>
 
-        <main class="col-4">
-            <div class="current-weather"></div>
-            <div>
-                <h2 class="forcast">5 Day Forecast:</h2>
+        <section>
+            <div id="current-weather-details" class="border rounded">
+                <h1 id="location">Enter a City (Today's Date)</h1>
+                <div>Temp:</div>
+                <div>Wind:</div>
+                <div>Humidity:</div>
+                <div>UV Index:</div>
             </div>
-            
-
-        </main>
-
-    </div>
+            <div>
+                <h2 id="5-day-forcast">5 Day Forecast:</h2>
+            </div>
+        </section>
+    </main>
 
     <!-- Jquery Link -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
