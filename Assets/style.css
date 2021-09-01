@@ -10,6 +10,7 @@ header {
     color: white;
     font-size: 35px;
     margin: 10px;
+    text-shadow: 10px, black;
     text-align: center;
 }
 
@@ -27,12 +28,16 @@ input {
 }
 
 #search-btn {
-    /* padding-left: 105px;
-    padding-right: 105px; */
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .jumbotron {
     padding-top: 12px;
     padding-bottom: 12px;
+}
+
+.border {
+    padding-left: 10px;
+    padding-right: 150px;
 }
