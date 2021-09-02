@@ -1,6 +1,5 @@
 // Global Variables 
 var APIKey = "21023d394bba75abe7a047a4ef72171b";
-var city = ""
 var weatherInfo = document.getElementById("current-weather-details")
 var searchBtn = document.getElementById("search-btn"); 
 
@@ -9,10 +8,10 @@ var searchBtn = document.getElementById("search-btn");
 
 // fetch(requestURL)
 // .then(function (response) {
-//     return response.json();
+    //     return response.json();
 // })
 // .then(function (data) {
-//     console.log('Fetch Response \n-------------');
+    //     console.log('Fetch Response \n-------------');
 //     console.log(data);
 //     for (var i = 0; i < data.length; i++) {
 //         console.log(data[i].url);
@@ -23,7 +22,8 @@ var searchBtn = document.getElementById("search-btn");
 
 
 function getApi() {
-    var requestUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + APIKey;
+    var city = document.getElementById("cityInput").value
+    var requestUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIKey;
   
     fetch(requestUrl)
       .then(function (response) {
@@ -31,7 +31,7 @@ function getApi() {
       })
       .then(function (data) {
         console.log(data);
-        for (var i = 0; i < data.length; i++) {
+        // for (var i = 0; i < data.length; i++) {
 
         //Reference html elements? 
         var location = document.getElementById("location"); 
@@ -41,19 +41,42 @@ function getApi() {
         var uvIndex = document.getElementById("uv-index"); 
 
         //Set the text of html elements .something?
-        location.textContent = data[i].
-        temp.textContent = data[i].
-        wind.textContent = data[i].
-        humidity.textContent = data[i].
-        uvIndex.textContent = data[i].
-  
+        location.textContent = data.name
+        temp.textContent = "Temp: " + data.main.temp +"F"
+        wind.textContent = data.wind.speed + " mph"
+        humidity.textContent = data.main.humidity
+
+        oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&appid=${APIKey}`
+        fetch(oneCallUrl)
+        .then(response => response.json())
+        .then(newData => {
+            console.log(newData)
+            uvIndex.textContent ="UVI: " + newData.current.uvi
+            if(newData.current.uvi >=3 || newData.current.uvi < 6){
+                uvIndex.setAttribute("style", "background-color: yellow;")
+            }
+
+            var forecastDiv = document.getElementById("5-day-forecast")
+            forecastDiv.innerHTML = "";
+            for(i=1; i<6 ; i++) {
+                var date = new Date(newData.daily[i].dt * 1000)
+                var dateString = date.toString().split(" ")
+                var formattedDate = `${dateString[0]} ${dateString[1]} ${dateString[2]} ${dateString[3]}`
+                console.log(formattedDate)
+
+                var newP = document.createElement("p");
+                newP.textContent = formattedDate;
+                forecastDiv.append(newP)
+                
+            }
+        })
         //Appending the dynamically generated html to the div associated with the id="current-weather-details"
-        weatherInfo.append(location);
-        weatherInfo.append(temp);
-        weatherInfo.append(wind);
-        weatherInfo.append(humidity);
-        weatherInfo.append(uvIndex);
-        }
+        // weatherInfo.append(location);
+        // weatherInfo.append(temp);
+        // weatherInfo.append(wind);
+        // weatherInfo.append(humidity);
+        // weatherInfo.append(uvIndex);
+        // }
       });
   }
   searchBtn.addEventListener('click', getApi);

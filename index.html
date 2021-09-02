@@ -21,20 +21,24 @@
     <main class="container row">
         <aside class="col-4">
             <h1>Search for a City:</h1>
-            <input class="form-control" type="text" placeholder="Enter City Name">
+            <input class="form-control" type="text" placeholder="Enter City Name" id="cityInput">
             <button id="search-btn" class="btn btn-primary" type="submit">Search</button>
         </aside>
 
         <section>
             <div id="current-weather-details" class="border border-dark rounded">
-                <h1 id="location" data-location>Enter a City (Today's Date)</h1>
+                <h1 id="location" data-location>Enter a City (Today's Date)</h1> 
+                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="weather image" />
                 <div id="temp" data-temp>Temp:</div>
-                <div id="Wind" data-wind>Wind:</div>
+                <div data-wind>Wind: <span id="wind"></span></div>
                 <div id="humidity" data-humidity>Humidity:</div>
                 <div id="uv-index" data-uv>UV Index:</div>
             </div>
             <div>
-                <h2 id="5-day-forcast">5 Day Forecast:</h2>
+                <h2 >5 Day Forecast:</h2>
+                <div id="5-day-forecast">
+
+                </div>
             </div>
         </section>
     </main>
