@@ -17,14 +17,14 @@ function getApi() {
         console.log(data);
         // for (var i = 0; i < data.length; i++) {
 
-        //Reference html elements? 
+        //Reference html elements
         var location = document.getElementById("location"); 
         var temp = document.getElementById("temp"); 
         var wind = document.getElementById("wind"); 
         var humidity = document.getElementById("humidity"); 
         var uvIndex = document.getElementById("uv-index"); 
 
-        //Set the text of html elements .something?
+        //Set the text of html elements 
         location.textContent = data.name
         temp.textContent = "Temp: " + data.main.temp +"°F"
         wind.textContent = data.wind.speed + " mph"
@@ -36,13 +36,15 @@ function getApi() {
         .then(newData => {
             console.log(newData)
             uvIndex.textContent ="UVI: " + newData.current.uvi
-            if(newData.current.uvi >=3 || newData.current.uvi < 5){
+            if(newData.current.uvi >=3 && newData.current.uvi < 5){
                 uvIndex.setAttribute("style", "background-color: yellow;")
-                } else if(newData.current.uvi >= 0 || newData.current.uvi < 2) {
+                } else if(newData.current.uvi >= 0 && newData.current.uvi < 2) {
                   uvIndex.setAttribute("style", "background-color: green;")
-                } else if(newData.current.uvi >= 6 || newData.current.uvi < 7) {
+                } else if(newData.current.uvi >= 6 && newData.current.uvi < 7) {
                   uvIndex.setAttribute("style", "background-color: orange;")
-                } else(newData.current.uvi >= 8 || newData.current.uvi < 11)
+                } else if(newData.current.uvi >= 8 && newData.current.uvi < 11) {
+                  uvIndex.setAttribute("style", "background-color: red;")
+                }
 
             var forecastDiv = document.getElementById("5-day-forecast")
             forecastDiv.innerHTML = "";
