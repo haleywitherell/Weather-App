@@ -4,22 +4,6 @@ var weatherInfo = document.getElementById("current-weather-details")
 var searchBtn = document.getElementById("search-btn"); 
 
 
-// fetch method syntax
-
-// fetch(requestURL)
-// .then(function (response) {
-    //     return response.json();
-// })
-// .then(function (data) {
-    //     console.log('Fetch Response \n-------------');
-//     console.log(data);
-//     for (var i = 0; i < data.length; i++) {
-//         console.log(data[i].url);
-//         console.log(data[i].user.login);
-//       }
-// })
-
-
 
 function getApi() {
     var city = document.getElementById("cityInput").value
@@ -42,9 +26,9 @@ function getApi() {
 
         //Set the text of html elements .something?
         location.textContent = data.name
-        temp.textContent = "Temp: " + data.main.temp +"F"
+        temp.textContent = "Temp: " + data.main.temp +"°F"
         wind.textContent = data.wind.speed + " mph"
-        humidity.textContent = data.main.humidity
+        humidity.textContent = "Humidity: " + data.main.humidity + "%"
 
         oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&appid=${APIKey}`
         fetch(oneCallUrl)
@@ -52,9 +36,13 @@ function getApi() {
         .then(newData => {
             console.log(newData)
             uvIndex.textContent ="UVI: " + newData.current.uvi
-            if(newData.current.uvi >=3 || newData.current.uvi < 6){
+            if(newData.current.uvi >=3 || newData.current.uvi < 5){
                 uvIndex.setAttribute("style", "background-color: yellow;")
-            }
+                } else if(newData.current.uvi >= 0 || newData.current.uvi < 2) {
+                  uvIndex.setAttribute("style", "background-color: green;")
+                } else if(newData.current.uvi >= 6 || newData.current.uvi < 7) {
+                  uvIndex.setAttribute("style", "background-color: orange;")
+                } else(newData.current.uvi >= 8 || newData.current.uvi < 11)
 
             var forecastDiv = document.getElementById("5-day-forecast")
             forecastDiv.innerHTML = "";
