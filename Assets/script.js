@@ -2,8 +2,10 @@
 var APIKey = "21023d394bba75abe7a047a4ef72171b";
 var weatherInfo = document.getElementById("current-weather-details")
 var searchBtn = document.getElementById("search-btn"); 
+var date = moment().format(" - dddd, MMMM Do, YYYY");
 
-
+// Date function
+$("#location").text(date);
 
 function getApi() {
     var city = document.getElementById("cityInput").value
@@ -25,7 +27,7 @@ function getApi() {
         var uvIndex = document.getElementById("uv-index"); 
 
         //Set the text of html elements 
-        location.textContent = data.name
+        location.textContent = data.name + date
         temp.textContent = "Temp: " + data.main.temp +"°F"
         wind.textContent = data.wind.speed + " mph"
         humidity.textContent = "Humidity: " + data.main.humidity + "%"
@@ -59,20 +61,34 @@ function getApi() {
                 forecastDiv.append(newP)
             }
         })
-        //Appending the dynamically generated html to the div associated with the id="current-weather-details"
-        // weatherInfo.append(location);
-        // weatherInfo.append(temp);
-        // weatherInfo.append(wind);
-        // weatherInfo.append(humidity);
-        // weatherInfo.append(uvIndex);
-        // }
+        
       });
   }
   searchBtn.addEventListener('click', getApi);
 
 
+// local storage - save searched cities 
 
+  
+  // Write a local item..
+localStorage.setItem("myKey", "myValue");
 
+// Read a local item..
+var theItemValue = localStorage.getItem("myKey");
+
+// Check for changes in the local item and log them..
+window.addEventListener('storage', function(event) {
+    console.log('The value for ' + event.key + ' was changed from' + event.oldValue + ' to ' + event.newValue);
+}, false);
+
+// Check for HTML5 Storage..
+function supports_html5_storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
 
 
 
