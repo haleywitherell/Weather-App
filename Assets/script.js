@@ -57,7 +57,6 @@ function getApi() {
                 var newP = document.createElement("p");
                 newP.textContent = formattedDate;
                 forecastDiv.append(newP)
-                
             }
         })
         //Appending the dynamically generated html to the div associated with the id="current-weather-details"
