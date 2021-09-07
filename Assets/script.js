@@ -57,8 +57,11 @@ function getApi() {
                 console.log(formattedDate)
 
                 var newP = document.createElement("p");
-                newP.textContent = formattedDate;
+                newP.textContent = " " + formattedDate + " ";
                 forecastDiv.append(newP)
+                newP.setAttribute("style", "display: inline;")
+
+               
 
 
         //         //Creating a h3 element and a p element
