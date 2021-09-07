@@ -29,7 +29,7 @@ function getApi() {
         //Set the text of html elements 
         location.textContent = data.name + date
         temp.textContent = "Temp: " + data.main.temp +"°F"
-        wind.textContent = data.wind.speed + " mph"
+        wind.textContent = data.wind.speed + " MPH"
         humidity.textContent = "Humidity: " + data.main.humidity + "%"
 
         oneCallUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&appid=${APIKey}`
@@ -59,6 +59,20 @@ function getApi() {
                 var newP = document.createElement("p");
                 newP.textContent = formattedDate;
                 forecastDiv.append(newP)
+
+
+        //         //Creating a h3 element and a p element
+        // var userName = document.createElement('h3');
+        // var userUrl = document.createElement('p');
+
+        // //Setting the text of the h3 element and p element.
+        // userName.textContent = data[i].login;
+        // userUrl.textContent = data[i].url;
+
+        // //Appending the dynamically generated html to the div associated with the id="users"
+        // //Append will attach the element as the bottom most child.
+        // usersContainer.append(userName);
+        // usersContainer.append(userUrl);
             }
         })
         
@@ -67,34 +81,51 @@ function getApi() {
   searchBtn.addEventListener('click', getApi);
 
 
+
 // local storage - save searched cities 
+var cityInput = document.querySelector("#cityInput")
+var searchedCities = document.querySelector("#searched-cities")
+var cityAmount = document.querySelector("#city-amount")
 
+var cities = []; 
+
+function renderCities() {
+  searchedCities.innerHTML = "";
   
-  // Write a local item..
-localStorage.setItem("myKey", "myValue");
 
-// Read a local item..
-var theItemValue = localStorage.getItem("myKey");
+    var li = document.createElement("li");
+    li.textContent = city;
+    li.setAttribute("data-index", i);
 
-// Check for changes in the local item and log them..
-window.addEventListener('storage', function(event) {
-    console.log('The value for ' + event.key + ' was changed from' + event.oldValue + ' to ' + event.newValue);
-}, false);
+    var button = document.createElement("button");
+    button.textContent = "Remove";
 
-// Check for HTML5 Storage..
-function supports_html5_storage() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
+    li.appendChild(button);
+    searchedCities.appendChild(li);
 }
 
+function previousCities() {
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+  if(storedCities !== null) {
+    cities = storedCities
+  }
+  renderCities();
+}
+
+function storeCities() {
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+cities.push(cityInput);
+cityInput.value = "";
+
+storeCities();
+renderCities();
+
+previousCities();
 
 
-
-
-// function to get weather 
 
 // function to get 5 day forecast
 
