@@ -23,14 +23,14 @@
             <h1>Search for a City:</h1>
             <input class="form-control" type="text" placeholder="Enter City Name" id="cityInput">
             <button id="search-btn" class="btn btn-primary" type="submit">Search</button>
-            <p id="city-amount">Previous Searches:</p>
+            <p id="num-of-cities">Previous Searches:</p>
             <ul id=searched-cities></ul>
         </aside>
 
         <section>
             <div id="current-weather-details" class="border border-dark rounded">
                 <h1 id="location" data-location>Enter a City</h1> 
-                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="weather image" />
+                <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="weather image" id="icon"/>
                 <div id="temp" data-temp>Temp:</div>
                 <div data-wind>Wind: <span id="wind"></span></div>
                 <div id="humidity" data-humidity>Humidity:</div>
@@ -38,7 +38,12 @@
             </div>
             <div>
                 <h2>5 Day Forecast:</h2>
+                <div id="temp2"></div>
+                <div id="wind2"></div>
+                <div id="humidity2"></div>
                 <div id="5-day-forecast" class="container row"></div>
+                <!-- p tag in js -->
+
             </div>
         </section>
     </main>

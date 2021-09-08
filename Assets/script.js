@@ -25,6 +25,7 @@ function getApi() {
 
         //Reference html elements
         var location = document.getElementById("location"); 
+        var icon = document.getElementById("icon"); 
         var temp = document.getElementById("temp"); 
         var wind = document.getElementById("wind"); 
         var humidity = document.getElementById("humidity"); 
@@ -32,6 +33,7 @@ function getApi() {
 
         //Set the text of html elements 
         location.textContent = data.name + date
+        icon.textContent = data.weather.icon
         temp.textContent = "Temp: " + data.main.temp +"°F"
         wind.textContent = data.wind.speed + " MPH"
         humidity.textContent = "Humidity: " + data.main.humidity + "%"
@@ -65,23 +67,11 @@ function getApi() {
                 var newP = document.createElement("p");
                 newP.textContent = " " + formattedDate + " ";
                 forecastDiv.append(newP)
-                newP.setAttribute("style", "display: inline;")
+                newP.setAttribute("style", "display: inline;", "margins: auto;")
 
-               
+                var p2 = document.createElement("p");
+                p2.textContent = location
 
-
-        //         //Creating a h3 element and a p element
-        // var userName = document.createElement('h3');
-        // var userUrl = document.createElement('p');
-
-        // //Setting the text of the h3 element and p element.
-        // userName.textContent = data[i].login;
-        // userUrl.textContent = data[i].url;
-
-        // //Appending the dynamically generated html to the div associated with the id="users"
-        // //Append will attach the element as the bottom most child.
-        // usersContainer.append(userName);
-        // usersContainer.append(userUrl);
             }
         })
         
@@ -89,6 +79,7 @@ function getApi() {
   }
   searchBtn.addEventListener('click', getApi);
 
+  // Local Storage save weather info to browser
 function loadStoredData() {
   const dataString = window.localStorage.getItem(cityWeatherKey)
 
@@ -125,75 +116,46 @@ function loadStoredData() {
 }
 loadStoredData()
 
-// do same thing for UV
 
 
 // local storage - save searched cities 
 
 
+var numOfCities = document.getElementById("#num-of-cities")
+
+ var cities = []
+ 
+
+ function displayCities() {
+   searchedCities.innerHTML = "";
+   numOfCities.textContent = cities.length;
+   numOfCities.setAttribute("style", "display: none")
 
 
+   for (var i = 0; i < cities.length; i++) {
+    var city = cities[i];
 
+    var li = document.createElement("li");
+    li.textContent = city;
+    li.setAttribute("data-index", i);
 
+    var button = document.createElement("button");
+    button.textContent = "Remove";
 
+    li.appendChild(button);
+    searchedCities.appendChild(li);
+  }
+}
 
+function showCities(){
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
 
+  if(!storedCities) return
 
+  displayCities();
+}
 
-
-
-
-
-
-
-
-// var cityInput = document.querySelector("#cityInput")
-// var searchedCities = document.querySelector("#searched-cities")
-// var cityAmount = document.querySelector("#city-amount")
-
-// var cities = []; 
-
-// function renderCities() {
-//   searchedCities.innerHTML = "";
-  
-
-//     var li = document.createElement("li");
-//     li.textContent = city;
-//     li.setAttribute("data-index", i);
-
-//     var button = document.createElement("button");
-//     button.textContent = "Remove";
-
-//     li.appendChild(button);
-//     searchedCities.appendChild(li);
-// }
-
-// function previousCities() {
-//   var storedCities = JSON.parse(localStorage.getItem("cities"));
-
-//   if(storedCities !== null) {
-//     cities = storedCities
-//   }
-//   renderCities();
-// }
-
-// function storeCities() {
-//   localStorage.setItem("cities", JSON.stringify(cities));
-// }
-
-// cities.push(cityInput);
-// cityInput.value = "";
-
-// storeCities();
-// renderCities();
-
-// previousCities();
-
-
-
-// function to get 5 day forecast
-
-// Set up local storage 
-
-// Function to save searched cities to local storage 
+function storeCities() {
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
 
