@@ -20,6 +20,7 @@ The following image shows the web application's appearance and functionality:
 - I used the weather API to pull real time weather info
 - I used local storage to save the data to the browser 
 - I used local storage to append previously searched cities to the page 
+- I used moment to set the current date and time 
 
 
 # Deployed Link
